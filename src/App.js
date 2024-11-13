@@ -1,26 +1,19 @@
 // src/App.js
 import React from 'react';
-import Navbar from './components/layout/Navbar';
-import Hero from './components/sections/Hero';
-import Services from './components/sections/Services';
-import Stats from './components/sections/Stats';
-import Portfolio from './components/sections/Portfolio';
-import Team from './components/sections/Team';
-import Contact from './components/sections/Contact';
-import Footer from './components/layout/Footer';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import PortfolioPage from './pages/Portfolio';
+import ProjectDetail from './pages/ProjectDetail';
 
 const App = () => {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Stats />
-      <Portfolio />
-      <Team />
-      <Contact />
-      <Footer />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/portfolio" element={<PortfolioPage />} />
+        <Route path="/portfolio/:id" element={<ProjectDetail />} />
+      </Routes>
+    </Router>
   );
 };
 

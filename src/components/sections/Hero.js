@@ -1,4 +1,3 @@
-// src/components/sections/Hero.js
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useCallback } from "react";
@@ -13,6 +12,31 @@ const Hero = () => {
   const particlesLoaded = useCallback(async container => {
     // console.log(container);
   }, []);
+
+  // Text animation variants
+  const titleVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: [0.6, -0.05, 0.01, 0.99] // Custom easing for smoother animation
+      }
+    }
+  };
+
+  const floatingTextVariants = {
+    animate: {
+      y: [-2, 2, -2],
+      transition: {
+        duration: 3,
+        ease: "easeInOut",
+        repeat: Infinity,
+        repeatType: "reverse"
+      }
+    }
+  };
 
   return (
     <div className="relative h-screen flex items-center overflow-hidden">
@@ -71,7 +95,7 @@ const Hero = () => {
                 default: "bounce",
               },
               random: false,
-              speed: 2,
+              speed: 1,
               straight: false,
             },
             number: {
@@ -79,7 +103,7 @@ const Hero = () => {
                 enable: true,
                 area: 800,
               },
-              value: 80,
+              value: 60,
             },
             opacity: {
               value: 0.5,
@@ -88,7 +112,7 @@ const Hero = () => {
               type: "circle",
             },
             size: {
-              value: { min: 1, max: 5 },
+              value: { min: 1, max: 3 },
             },
           },
           detectRetina: true,
@@ -99,60 +123,73 @@ const Hero = () => {
       {/* Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10">
         <div className="text-center">
+          {/* Title */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.5,
-              ease: [0, 0.71, 0.2, 1.01]
-            }}
+            initial="hidden"
+            animate="visible"
+            variants={titleVariants}
+            className="mb-8"
           >
-            <motion.h1
-              className="text-5xl md:text-7xl font-extrabold text-white"
-              animate={{ 
-                y: [0, -20, 0],
-                scale: [1, 1.02, 1]
-              }}
-              transition={{ 
-                duration: 5,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            >
-              <span className="block bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200">
-                Next Generation
-              </span>
-              <span className="block text-blue-200 mt-2">
-                Software Solutions
-              </span>
-            </motion.h1>
+            <div className="overflow-hidden">
+              <motion.h1 className="text-5xl md:text-7xl font-extrabold">
+                <motion.span
+                  className="block bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200"
+                  variants={floatingTextVariants}
+                  // animate="animate"
+                >
+                  Next Generation
+                </motion.span>
+                <motion.span
+                  className="block text-blue-200 mt-2"
+                  variants={floatingTextVariants}
+                  // animate="animate"
+                >
+                  Software Solutions
+                </motion.span>
+              </motion.h1>
+            </div>
           </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
-            className="mt-6 max-w-md mx-auto text-base text-blue-100 sm:text-lg md:mt-8 md:text-xl md:max-w-3xl"
-          >
-            We craft cutting-edge software solutions that empower businesses 
-            to thrive in the digital age.
-          </motion.p>
-
+          {/* Description */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 0.6
+            }}
+          >
+            <p className="mt-6 max-w-md mx-auto text-base text-blue-100 sm:text-lg md:mt-8 md:text-xl md:max-w-3xl">
+              We craft cutting-edge software solutions that empower businesses 
+              to thrive in the digital age.
+            </p>
+          </motion.div>
+
+          {/* Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.8,
+              ease: "easeOut",
+              delay: 0.8
+            }}
             className="mt-8 max-w-md mx-auto sm:flex sm:justify-center md:mt-12"
           >
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ 
+                scale: 1.05,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ 
+                scale: 0.95,
+                transition: { duration: 0.2 }
+              }}
               className="rounded-md shadow"
             >
-              
-               <a href="#contact"
-                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:shadow-lg"
+              <a href="#contact"
+                className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 md:py-4 md:text-lg md:px-10 transition-all duration-300"
               >
                 Get Started
               </a>
@@ -161,39 +198,32 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Animated shapes */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80">
-          <motion.div
-            className="absolute w-full h-full rounded-full bg-blue-400 opacity-20"
-            animate={{
-              scale: [1, 2, 2, 1, 1],
-              rotate: [0, 0, 270, 270, 0],
-              borderRadius: ["20%", "20%", "50%", "50%", "20%"],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          />
-        </div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80">
-          <motion.div
-            className="absolute w-full h-full rounded-full bg-blue-400 opacity-20"
-            animate={{
-              scale: [1, 2, 2, 1, 1],
-              rotate: [0, 0, 270, 270, 0],
-              borderRadius: ["50%", "20%", "50%", "20%", "50%"],
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-          />
-        </div>
-      </div>
+      {/* Background animated shapes */}
+      <motion.div 
+        className="absolute top-1/4 right-0 w-72 h-72 bg-white rounded-full mix-blend-multiply filter blur-xl opacity-10"
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, 100, 0],
+        }}
+        transition={{
+          duration: 10,
+          ease: "easeInOut",
+          repeat: Infinity,
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-0 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-10"
+        animate={{
+          scale: [1, 1.2, 1],
+          x: [0, -100, 0],
+        }}
+        transition={{
+          duration: 10,
+          ease: "easeInOut",
+          repeat: Infinity,
+          delay: 1
+        }}
+      />
     </div>
   );
 };

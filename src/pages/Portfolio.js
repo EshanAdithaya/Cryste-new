@@ -1,4 +1,3 @@
-// src/pages/Portfolio.js
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Globe, Code2, Layout } from 'lucide-react';
@@ -72,13 +71,13 @@ const ProjectCard = ({ project }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="bg-white rounded-xl shadow-lg overflow-hidden"
+    className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full"
   >
     <div className="relative">
       <img 
         src={project.image} 
         alt={project.title} 
-        className="w-full h-64 object-cover"
+        className="w-full h-48 object-cover"
       />
       <div className="absolute top-4 right-4">
         <span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm">
@@ -87,17 +86,17 @@ const ProjectCard = ({ project }) => (
       </div>
     </div>
     
-    <div className="p-6">
-      <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
-      <p className="text-gray-600 mb-4">{project.description}</p>
+    <div className="p-6 flex flex-col flex-grow">
+      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+      <p className="text-gray-600 mb-4 line-clamp-2">{project.description}</p>
       
       <div className="mb-4">
-        <h4 className="text-lg font-semibold mb-2">Technologies:</h4>
+        <h4 className="text-base font-semibold mb-2">Technologies:</h4>
         <div className="flex flex-wrap gap-2">
           {project.technologies.map((tech, index) => (
             <span 
               key={index}
-              className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+              className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs"
             >
               {tech}
             </span>
@@ -106,19 +105,19 @@ const ProjectCard = ({ project }) => (
       </div>
       
       <div className="mb-4">
-        <h4 className="text-lg font-semibold mb-2">Key Features:</h4>
-        <ul className="list-disc list-inside text-gray-600">
+        <h4 className="text-base font-semibold mb-2">Key Features:</h4>
+        <ul className="list-disc list-inside text-gray-600 text-sm">
           {project.features.slice(0, 3).map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}
         </ul>
       </div>
       
-      <div className="flex justify-between items-center mt-6">
-        <div className="space-x-4">
+      <div className="flex justify-between items-center mt-auto pt-4">
+        <div className="space-x-3">
           <Link 
             to={`/portfolio/${project.id}`}
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm"
           >
             View Details <ChevronRight className="ml-1 w-4 h-4" />
           </Link>
@@ -126,12 +125,12 @@ const ProjectCard = ({ project }) => (
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 text-sm"
           >
             Visit Website <Globe className="ml-1 w-4 h-4" />
           </a>
         </div>
-        <span className="text-gray-500 text-sm">
+        <span className="text-gray-500 text-xs">
           {project.completionDate}
         </span>
       </div>
@@ -178,8 +177,8 @@ const PortfolioPage = () => {
           ))}
         </div>
         
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Projects Grid - Modified for 3 columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProjects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

@@ -45,6 +45,25 @@ const projects = [
     completionDate: "October 2023",
     previewImage: "/api/placeholder/400/300",
     shortDescription: "Spices product Company"
+  },
+  {
+    id: 'Sumaga',
+    title: "Samee Products",
+    category: "E-Commerce",
+    description: "An innovative e-commerce solution for spice products, featuring a modern design and robust functionality.",
+    technologies: ["Next.js", "Express", "PostgreSQL", "Material UI"],
+    image: "/api/placeholder/600/400",
+    link: "https://sameeproducts.lk/",
+    features: [
+      "Product filtering",
+      "User authentication",
+      "Order tracking",
+      "Review system",
+      "Inventory management"
+    ],
+    completionDate: "October 2023",
+    previewImage: "/api/placeholder/400/300",
+    shortDescription: "Spices product Company"
   }
 ];
 
